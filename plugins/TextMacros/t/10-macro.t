@@ -5,7 +5,7 @@ use strict;
 use warnings;
 
 use MT::Test qw( :db :data );
-use Test::More tests => 3;
+use Test::More tests => 4;
 
 require MT::Entry;
 my $e = MT::Entry->new;
@@ -54,5 +54,16 @@ is( $tmpl->output,
     "Bad id in PageURL macro"
 );
 
+# let's add a slightly fancier macro
+my $p = MT->component('TextMacros');
+my $r = $p->registry;
+$r->{text_macros}->{CurrentTag} = sub {
+  my ($ctx, $args) = @_;
+  return $ctx->this_tag();
+};
+
+$e->text('[% CurrentTag %]');
+$e->save;
+is($tmpl->output, q(<p>mtentrybody</p>), "Context-using macro");
 
 1;

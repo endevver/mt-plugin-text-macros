@@ -42,8 +42,7 @@ substituted in their place.
 # Handlers
 
 Handlers for new macros are defined in a plugin's config.yaml under the `text_macros` 
-key. Each macro specifies a handler for processing input. Each handler takes as input
-a single argument in the form of a hash containing the arguments passed into the
+key. Each macro specifies a handler for processing input. Each handler takes as input the current template context and an argument in the form of a hash containing the arguments passed into the
 tag. 
 
 ## Example
@@ -59,14 +58,14 @@ Then create the following library file `plugins/MyPlugin/lib/MyPlugin.pm` and in
 it create the following subroutine:
 
     sub macro_page_url {
-      my ($args) = @_;
+      my ($ctx, $args) = @_;
       my $page;
       if ($args->{'id'}) {
           $page = MT->model('page')->load( $args->{'id'} );
       } elsif ($args->{'basename'}) {
           $page = MT->model('page')->load({ basename => $args->{'basename'} });
       }
-      return $page->permalink;
+      return $page ? $page->permalink : '';
     }
 
 # Installation
