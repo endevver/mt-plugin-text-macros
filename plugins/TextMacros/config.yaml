@@ -1,0 +1,12 @@
+id: TextMacros
+name: 'Text Macros'
+description: 'A super simple meta language for generating HTML in entries and pages.'
+version: 0.1
+
+tags:
+  modifier:
+    text_macros: 
+      handler: $TextMacros::TextMacros::Plugin::filter
+
+text_macros: 
+  PageURL: $TextMacros::TextMacros::Plugin::macro_page_url
