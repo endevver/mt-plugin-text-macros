@@ -7,6 +7,22 @@ inside of an entry:
 
    [% PageURL id="32" %]
 
+# Installation
+
+To install this plugin follow the instructions found here:
+
+http://tinyurl.com/easy-plugin-install
+
+# Supported Macros
+
+* `PageURL` - takes a single argument `id` which identifies the page for which
+  to generate a URL for. 
+
+Need another macro, but don't know how to build one yourself? At Endevver, we'll 
+create one for you. And if it is simple, which it probably will be, we'll do it
+for free. We're that nice. Yes we are. Visit our [help center](http://help.endevver.com)
+to submit your request. 
+
 # Enabling Macros
 
 To turn on the text macro capabilities you need to add the following attribute to
@@ -39,7 +55,9 @@ The following are all acceptable syntaxes for the same tag.
 Macros that do not have a handler defined for them will have a blank string
 substituted in their place.
 
-# Handlers
+# Developer Guide
+
+## Creating New Macros - Writing a Handler
 
 Handlers for new macros are defined in a plugin's config.yaml under the `text_macros` 
 key. Each macro specifies a handler for processing input. Each handler takes as input
@@ -68,12 +86,6 @@ it create the following subroutine:
       }
       return $page->permalink;
     }
-
-# Installation
-
-To install this plugin follow the instructions found here:
-
-http://tinyurl.com/easy-plugin-install
 
 # License
 
