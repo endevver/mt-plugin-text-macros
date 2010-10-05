@@ -67,7 +67,7 @@ sub macro_page_url {
     } elsif ($args->{'basename'}) {
         $page = MT->model('page')->load({ basename => $args->{'basename'} });
     }
-    return $page->permalink;
+    return $page ? $page->permalink : '';
 }
 
 1;

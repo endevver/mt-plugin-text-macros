@@ -51,7 +51,7 @@ $e->save;
 # should just blank this out or something
 is( $tmpl->output,
     q(<p></p>),
-    "Basic template text functions with text_macros turned on"
+    "Bad id in PageURL macro"
 );
 
 
