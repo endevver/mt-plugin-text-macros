@@ -87,6 +87,36 @@ it create the following subroutine:
       return $page->permalink;
     }
 
+# Frequently Asked Questions
+
+**Does Text Macros work with any MT template tag and if so how is this different from mteval?**
+
+Text Macros is a distinct "language" from the more powerful templating language that 
+powers Movable Type and Melody. The reason we developed these macros was in order to 
+create a much simpler and more constrained way of injecting dynamically generated content
+into an entry. We could have used the MTEval plugin, but we ultimately felt that the 
+MT templating language is too verbose, and for simple tasks, like embedding a URL to a page
+requires too much knowledge. 
+
+# Help, Bugs and Feature Requests ##
+
+If you are having problems installing or using the plugin, or if you would like to request
+us to implement a new macro to add to this pack, please check out our general knowledge 
+base and help ticket system at [help.endevver.com](http://help.endevver.com).
+
+# About Endevver 
+
+We design and develop web sites, products and services with a focus on 
+simplicity, sound design, ease of use and community. We specialize in 
+Movable Type and offer numerous services and packages to help customers 
+make the most of this powerful publishing platform.
+
+http://www.endevver.com/
+
+# Copyright 
+
+Copyright 2010, Endevver, LLC. All rights reserved.
+
 # License
 
 This plugin is licensed under the same terms as Perl itself.
