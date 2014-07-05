@@ -6,12 +6,12 @@ use MT::Util qw( trim );
 sub filter {
     my ($str, $val, $ctx) = @_;
     return $str unless $val;
-    $str =~ s!(\[\%\s*((?:\[[^\[]+?>|"(?:\[[^\]]+?>|.)*?"|'(?:\[[^\]]+?>|.)*?'|.)+?)\%\])!_transform($1,$2,$3,$4)!gmie;
+    $str =~ s!(\[\%\s*((?:\[[^\[]+?>|"(?:\[[^\]]+?>|.)*?"|'(?:\[[^\]]+?>|.)*?'|.)+?)\%\])!_transform($1,$2,$3,$ctx)!gmie;
     return $str;
 }
 
 sub _transform {
-    my ($whole_tag, $tag, $space_eater) = @_;
+    my ($whole_tag, $tag, $space_eater, $ctx) = @_;
     ($tag, my($argstr)) = split /\s+/, $tag, 2;
     my %args;
     while ($argstr =~ /
@@ -55,19 +55,19 @@ sub _transform {
     my $macros = MT->registry('text_macros');
     if (my $handler = $macros->{$tag}) {
         my $coderef = MT->handler_to_coderef($handler);
-        $coderef->( \%args );
+        $coderef->( $ctx, \%args );
     }
 }
 
 sub macro_page_url {
-    my ($args) = @_;
+    my ($ctx, $args) = @_;
     my $page;
     if ($args->{'id'}) {
         $page = MT->model('page')->load( $args->{'id'} );
     } elsif ($args->{'basename'}) {
         $page = MT->model('page')->load({ basename => $args->{'basename'} });
     }
-    return $page->permalink;
+    return $page ? $page->permalink : '';
 }
 
 1;
